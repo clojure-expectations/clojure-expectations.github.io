@@ -35,7 +35,7 @@
           <li><a class="buttons" href="freeze-time.html">Freeze Time</a></li>
           <li><a class="buttons" href="env-tweaks.html">ENV Tweaks</a></li>
           <li><a class="buttons" href="emacs-tweaks.html">emacs Tweaks</a></li>
-          <li><a class="buttons github" href="https://github.com/jaycfields/expectations">View On GitHub</a></li>
+          <li><a class="buttons github" href="https://github.com/clojure-expectations/expectations">View On GitHub</a></li>
         </ul>
 
         <p class="header">This project is maintained by <a class="header name" href="https://github.com/jaycfields">jaycfields</a></p>
@@ -61,7 +61,7 @@ After being bitten by this issue a few times, I added the ability to warn when g
 As of version 1.4.24 if you add <code>(expectations/warn-on-iref-updates)</code> anywhere, expectations will provide you with a warning whenever any global state is altered.
 <br><br>
 While you can add that snippet anywhere, I prefer to add it to the Before Suite hook described in <a href="before-run-hook.html">this section</a>.
-There's an example <code><a href="https://github.com/jaycfields/expectations/blob/master/test/clojure/expectations_options.clj">expectations_options.clj</a></code>
+There's an example <code><a href="https://github.com/clojure-expectations/expectations/blob/master/test/clojure/expectations_options.clj">expectations_options.clj</a></code>
 in the expectations codebase that shows all of the code you need to enable this feature.
 Simply add this file or add the function to your existing file and you should see a warning on any global state alteration.
 If you're not sure where to put this file, refer to <a href="before-run-hook.html">this section</a>.

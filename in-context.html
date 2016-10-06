@@ -35,7 +35,7 @@
           <li><a class="buttons" href="freeze-time.html">Freeze Time</a></li>
           <li><a class="buttons" href="env-tweaks.html">ENV Tweaks</a></li>
           <li><a class="buttons" href="emacs-tweaks.html">emacs Tweaks</a></li>
-          <li><a class="buttons github" href="https://github.com/jaycfields/expectations">View On GitHub</a></li>
+          <li><a class="buttons github" href="https://github.com/clojure-expectations/expectations">View On GitHub</a></li>
         </ul>
 
         <p class="header">This project is maintained by <a class="header name" href="https://github.com/jaycfields">jaycfields</a></p>
@@ -59,7 +59,7 @@ Too abstract, no problem, the code:
 <br><br>
 <script src="https://gist.github.com/jaycfields/5281648.js"></script>
 <br>
-That's it, if you add the previous function to your tests, you can define whatever you like in the in-context function, and your tests will be run in your custom context. The previous snippet is pulled from the expectations tests, which verify that success.success-examples-src/a-fn-to-be-rebound is correctly rebound. In the expectations tests an <a href="https://github.com/jaycfields/expectations/blob/5dd034c6835a197e38d5285b9f97ed5dc9c2bd9a/test/clojure/expectations_options.clj">expectations_options.clj</a> namespace is used to define in-context (expectations_options.clj explained <a href="http://blog.jayfields.com/2013/01/clojure-expectations-before-run-hook.html">here</a>).
+That's it, if you add the previous function to your tests, you can define whatever you like in the in-context function, and your tests will be run in your custom context. The previous snippet is pulled from the expectations tests, which verify that success.success-examples-src/a-fn-to-be-rebound is correctly rebound. In the expectations tests an <a href="https://github.com/clojure-expectations/expectations/blob/5dd034c6835a197e38d5285b9f97ed5dc9c2bd9a/test/clojure/expectations_options.clj">expectations_options.clj</a> namespace is used to define in-context (expectations_options.clj explained <a href="http://blog.jayfields.com/2013/01/clojure-expectations-before-run-hook.html">here</a>).
 <br><br>
 Why would you want to define your own context? In the past I've used <code>in-context</code> for two reasons: rebinding things I don't care about (e.g. calls to logging) to <code>(constantly true)</code>, and rebinding things I never want called (e.g. create a new thread) to <code>#(throw (RuntimeException. "not allowed in tests"))</code>
 
