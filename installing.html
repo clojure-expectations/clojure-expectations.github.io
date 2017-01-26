@@ -78,7 +78,7 @@ following dependency to your <code>project.clj</code> or <code>build.boot</code>
 <p>Add <code>simple_test.clj</code> to your test directory</p>
 
 <div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">simple-test</span>
-  <span class="p">(</span><span class="ss">:use</span> <span class="nv">expectations</span><span class="p">))</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">expectations</span> <span class="ss">:refer :all</span><span class="p">)])</span>
 
 <span class="p">(</span><span class="nf">expect</span> <span class="nb">nil? </span><span class="nv">nil</span><span class="p">)</span>
 </pre></div>
@@ -106,7 +106,7 @@ following dependency to your <code>project.clj</code> or <code>build.boot</code>
 <p>Add <code>simple_test.clj</code> to your test directory</p>
 
 <div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">simple-test</span>
-  <span class="p">(</span><span class="ss">:use</span> <span class="nv">expectations</span><span class="p">))</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">expectations</span> <span class="ss">:require :all</span><span class="p">)])</span>
 
 <span class="p">(</span><span class="nf">expect</span> <span class="nb">nil? </span><span class="nv">nil</span><span class="p">)</span>
 </pre></div>
@@ -136,7 +136,7 @@ following dependency to your <code>project.clj</code> or <code>build.boot</code>
 <p>Add simple_test.clj to your test directory</p>
 
 <div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">simple-test</span>
-  <span class="p">(</span><span class="ss">:use</span> <span class="nv">expectations</span><span class="p">))</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">expectations</span> <span class="ss">:require :all</span><span class="p">)])</span>
 
 <span class="p">(</span><span class="nf">expect</span> <span class="nb">nil? </span><span class="nv">nil</span><span class="p">)</span>
 </pre></div>
@@ -168,7 +168,7 @@ The following example is what I use to run all the tests in expectations with JU
 <p>Create ClojureTests.java in your proj/test/java directory. Next you can create sample-test in proj/test/clojure.</p>
 
 <div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">simple-test</span>
-  <span class="p">(</span><span class="ss">:use</span> <span class="nv">expectations</span><span class="p">))</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">expectations</span> <span class="ss">:require :all</span><span class="p">)])</span>
 
 <span class="p">(</span><span class="nf">expect</span> <span class="nb">nil? </span><span class="nv">nil</span><span class="p">)</span>
 </pre></div>
@@ -184,7 +184,7 @@ The following example is what I use to run all the tests in expectations with JU
 expectations in a simple test.</p>
 
 <div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">simple.test</span>
-  <span class="p">(</span><span class="ss">:use</span> <span class="nv">expectations</span><span class="p">))</span>
+  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">expectations</span> <span class="ss">:require :all</span><span class="p">)])</span>
 
 <span class="p">(</span><span class="nf">expect</span> <span class="nb">nil? </span><span class="nv">nil</span><span class="p">)</span>
 </pre></div>

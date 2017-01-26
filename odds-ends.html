@@ -74,7 +74,7 @@ If you use expect-focused only expectations that are defined using expect-focuse
 <br />
 For example, if you have the following expectations in a file you should see the following results from 'lein expectations'.<br />
 <pre>(ns sample.test.core
-  (:use [expectations]))
+  (:require [expectations :refer :all]))
 
 (expect zero? 0)
 (expect zero? 1)
