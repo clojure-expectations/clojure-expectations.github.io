@@ -39,7 +39,7 @@
           <li><a class="buttons github" href="https://github.com/clojure-expectations/expectations">View On GitHub</a></li>
         </ul>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/jaycfields">jaycfields</a></p>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/seancorfield">seancorfield</a> and <a class="header name" href="https://github.com/jaycfields">jaycfields</a></p>
 
 
       </header>
@@ -78,7 +78,7 @@ By default, expectations pretty-prints the raw expectation. Below is the output 
 <a href="images/fail-with-raw.png"><img border="0" width="400" src="images/fail-with-raw.png"/></a>
 </div>
 The raw expectation is (probably) helpful when you're running tests from the command line; however, that same output is probably noise when you're running tests inside emacs.
-When using <a href="https://github.com/gar3thjon3s/expectations-mode">expectations-mode</a> the failing (or erroring) expectation will be highlighted, and you can hit <code>C-c '</code> to see the details.
+When using <a href="https://github.com/clojure-expectations/expectations-mode">expectations-mode</a> the failing (or erroring) expectation will be highlighted, and you can hit <code>C-c '</code> to see the details.
 The details appear in the minibuffer, and I can't see much value in printing the raw expectation - (a) it forces the minibuffer to a larger size and (b) the raw expectation is directly in front of you, you had to have the cursor on it to see the details.
 <br><br>
 To (once again) remove noise, you can set the EXPECTATIONS_SHOW_RAW environment var to 'false', and the raw expectation will no longer appear in the details.
