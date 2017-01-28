@@ -75,6 +75,19 @@ Ran 1 tests containing 1 assertions in 5 msecs
 As you can see from the previous example, writing an expectation using a regex is syntactically the same as writing an equality expectation -
 and this is true for all of the non-equality expectations. In expectations there is only one syntax for expect - it's always (expect expected actual).<br />
 <br />
+<span style="font-weight: bold;">Almost Equal</span><br />
+When you provide a numeric expected value, expectations will check that it is
+<em>equal</em> to the actual value. That's fine for integer values but not good
+for floating point values, so expectations provides a predicate that lets you
+expect "almost equal" values:
+<pre>
+(expect (approximately 0.333) (/ 1 3)) ;; succeeds
+(expect (approximately 0.333 0.001) (/ 1 3)) ;; equivalent to this</pre>
+You can specify a delta value for how close the actual value must be. As shown
+above, the default is 0.001 and the test is equivalent to:
+<pre>
+(expect true (<= 0.332 (/ 1 3) 0.334))
+<br />
 <span style="font-weight: bold;">Testing for a certain type</span><br />
 I basically never write tests that verify the result of a function is a certain type. However, for the once in a blue moon case where that's what I need,
 expectations allows me to verify that the result of a function call is a certain type simply by using that type as the expected value.
