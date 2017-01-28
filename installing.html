@@ -59,7 +59,7 @@
   <a href="http://boot-clj.com">Boot</a>. Add the
 following dependency to your <code>project.clj</code> or <code>build.boot</code> file:</p>
 
-<div class="highlight"><pre><span class="p">[</span><span class="nv">expectations</span> <span class="s">"2.1.9"</span><span class="p">]</span>
+<div class="highlight"><pre><span class="p">[</span><span class="nv">expectations</span> <span class="s">"2.2.0-SNAPSHOT"</span><span class="p">]</span>
 </pre></div>
 
         <p>note: expectations can go in a <code class="highlight k">:dev</code> profile in <code>project.clj</code>,
@@ -101,6 +101,10 @@ following dependency to your <code>project.clj</code> or <code>build.boot</code>
 
 <p>You can also use <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a> to automatically run expectations when your Clojure source changes.</p>
 
+<p>Alternatively, as of version 2.2.0-SNAPSHOT, you can use <code>lein test</code>
+  and write your tests using the <a href="/clojure-test.html">clojure.test
+  compatibility style</a> of expectations.</p>
+
 <h2>
 <a name="getting-started-with-boot" class="anchor" href="#getting-started-with-boot"><span class="octicon octicon-link"></span></a>Getting Started With Boot</h2>
 
@@ -131,6 +135,11 @@ following dependency to your <code>project.clj</code> or <code>build.boot</code>
 
 <p>You can also use <code>boot watch expectations</code> to automatically run expectations when your Clojure source changes.</p>
 
+<p>Alternatively, as of version 2.2.0-SNAPSHOT, you can use <code>boot test</code>,
+  and the <a href="https://github.com/adzerk-oss/boot-test">boot-test</a> task,
+  and write your tests using the <a href="/clojure-test.html">clojure.test
+  compatibility style</a> of expectations.</p>
+
 <h2>
 <a name="getting-started-with-emacs" class="anchor" href="#getting-started-with-emacs"><span class="octicon octicon-link"></span></a>Getting Started With Emacs</h2>
 
@@ -143,6 +152,10 @@ following dependency to your <code>project.clj</code> or <code>build.boot</code>
 </pre></div>
 
 <p>Follow the directions available on <a href="https://github.com/clojure-expectations/expectations-mode">expectations-mode</a></p>
+
+<p>Alternatively, as of version 2.2.0-SNAPSHOT, you can use CIDER's standard
+  test running commands, if you write your tests using the <a href="/clojure-test.html">clojure.test
+  compatibility style</a> of expectations.</p>
 
 <h2>
 <a name="getting-started-with-intellij" class="anchor" href="#getting-started-with-intellij"><span class="octicon octicon-link"></span></a>Getting Started With IntelliJ</h2>

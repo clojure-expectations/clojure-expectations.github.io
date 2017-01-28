@@ -52,15 +52,15 @@
 
 <h2>
 <a name="clojure-test-compatibility" class="anchor" href="#clojure-test-compatibility"><span class="octicon octicon-link"></span></a>clojure.test compatibility</h2>
-<p>Experimental <code>clojure.test</code> compatibility is available as part of the 2.2.0-SNAPSHOT release.
-  There is a new <code>expectations.clojure.test</code> namespace containing a <code>defexpect</code> that
+<p><code>clojure.test</code> compatibility is available as part of the 2.2.0-SNAPSHOT release.
+  There is a new <code>expectations.clojure.test</code> namespace containing a <code>defexpect</code> macro that
   allows for named expectations to be defined, like <code>clojure.test</code>'s <code>deftest</code> macro.</p>
 <div class="highlight"><pre>(ns example.test
   (:require [expectations :refer :all]
             [expectations.clojure.test :refer [defexpect]]))
 
 ;; a single named expectation
-(defexpect two 2 (+ 1 1 ))
+(defexpect two 2 (+ 1 1))
 
 ;; a named group of expectations
 (defexpect group
@@ -68,48 +68,64 @@
   (expect #{1 2} (conj #{} 1 2))
   (expect {1 2} (assoc {} 1 2)))
 </pre></div>
-<p>Expectations defined this way can be run with regular <code>clojure.test</code> tooling, such as <code>lein test</code>.</p>
+<p>Expectations defined this way can be run with regular <code>clojure.test</code>
+  tooling, such as <code>lein test</code> or <code>boot test</code>,
+  or via the "standard" test running commands within various Clojure-compatible
+  editors that are designed to work with <code>clojure.test</code>.</p>
+<p>The above code creates functions <code>two</code> and <code>group</code> that
+  have <code>:test</code> metadata (containing the actual test expressions), and
+  the functions themselves run <code>clojure.test/test-var</code> on themselves
+  so you can call <code>(two)</code> and <code>(group)</code> to run those tests
+  (and they will print out any failures), the same way <code>deftest</code> works.</p>
+
+<p>When you <code>require</code> the <code>expectations.clojure.test</code>
+  namespace, it automatically disables the default "run tests on shutdown" mode
+  of expectations. Since most of the expectations tooling already disables that
+  and runs tests explicitly, this should not cause too many surprises but it is
+  worth being aware of this when you start to mix'n'match test styles.</p>
+
+<h3>
+  <a name="migrating-to-clojure-test" class="anchor" href="#migrating-to-clojure-test"><span class="octicon octicon-link"></span></a>migrating to clojure.test</h3>
+<p>Given the streamlined simplicity of expectations, you might wonder why you
+  would want to migrate your expectations test suite to <code>clojure.test</code>-style
+  named tests? The short answer is <strong>tooling</strong>! Whilst we have
+  well-maintained plugins for Leiningen and Boot, as well as an Emacs mode,
+  the reality is that Clojure tooling is constantly evolving and most of those
+  tools -- such as the excellent <a href="https://cider.readthedocs.io/en/latest/">CIDER</a>
+  and the more recent <a href="https://atom.io/packages/proto-repl">ProtoREPL</a> (for Atom) --
+  are going to focus on Clojure's built-in testing library first. A whole ecosystem
+  of tooling has grown up around <code>clojure.test</code> and to take advantage of
+  that with expectations, we either need to develop compatible extensions to each
+  and every tool or we need expectations to be compatible with <code>clojure.test</code>.</p>
+<p>One of the big obstacles for that compatibility is that, by default, expectations
+  generates "random" function names for test code (the function names are based on the
+  hashcode of the text form of the <code>expect</code> body), which means the test
+  name changes whenever the text of the test changes. To address that, the new
+  <code>expectations.clojure.test</code> namespace introduces named expectations via
+  the <code>defexpect</code> macro (mimicking <code>clojure.test</code>'s <code>deftest</code>
+  macro). Whilst this goes against the <a href="/odds-ends.html#oe">Test Names</a>
+  philosophy that expectations was created with, it buys us a lot in terms of
+  tooling support!</p>
+<p>You can convert your test suite piecemeal, either replacing <code>expect</code>
+  with <code>defexpect</code> (and a name) or wrapping several <code>expect</code>
+  forms with a single <code>defexpect</code> (and a name). You can do this one
+  test at a time, or in larger pieces, but you'll need to run both types of tests
+  explicitly via tooling:</p>
 <pre>
+jfields$ lein do expectations, test
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+jfields$ boot expectations test
 </pre>
+<p>In addition to broader tooling support, you also get access to anything that
+  is built on top of <code>clojure.test</code>, such as JUnit XML output,
+  automatically.</p>
+<p>What do you lose? Well, <code>clojure.test</code>-based failure reporting
+  isn't as sophisticated as expectations-based failure reporting so you will get
+  just "expected" and "actual" values, and a message with slightly
+  more detail for some types of failure. Unlike <code>clojure.test</code> itself,
+  the "expected" and "actual" values show both the final computed value and the
+  expression that created it. I hope to further improve this area in future,
+  to restore some of the improvements from expectations' failure reporting.</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
