@@ -35,6 +35,7 @@
           <li><a class="buttons" href="freeze-time.html">Freeze Time</a></li>
           <li><a class="buttons" href="env-tweaks.html">ENV Tweaks</a></li>
           <li><a class="buttons" href="emacs-tweaks.html">emacs Tweaks</a></li>
+          <li><a class="buttons" href="clojure-test.html">clojure.test</a></li>
           <li><a class="buttons github" href="https://github.com/clojure-expectations/expectations">View On GitHub</a></li>
         </ul>
 
@@ -57,9 +58,9 @@ expectations is built with the idea that unit tests should contain <a href="http
 <br />
 For example, if you want to verify the result of a function call, all you need to do is specify what return value you expect from the function call.<br />
 <pre>(expect 2 (+ 1 1)</pre>
-note: you'll want to (:use expectations); however, no other setup is required for using expectations. I created a sample project for this blog post and the entire test file looks like this (at this point):<br />
+note: you'll want to (:require [expectations :refer :all]); however, no other setup is required for using expectations. I created a sample project for this blog post and the entire test file looks like this (at this point):<br />
 <pre>(ns sample.test.core
-  (:use [expectations]))
+  (:require [expectations :refer :all]))
 
 (expect 2 (+ 1 1))</pre>
 I'm using 'lein expectations' to run my tests. For more information on 'lein expectations', check out the <a href="installing.html">Installing</a> page.<br />
@@ -68,7 +69,7 @@ Ran 1 tests containing 1 assertions in 2 msecs
 0 failures, 0 errors.</pre>
 That's the simplest, and most often used expectation - an equality comparison. The equality comparison works across all Clojure types - vectors, sets, maps, etc and any Java instances that return true when given to Clojure's = function.<br />
 <pre>(ns sample.test.core
-  (:use [expectations]))
+  (:require [expectations :refer :all]))
 
 (expect 2 (+ 1 1))
 (expect [1 2] (conj [] 1 2))

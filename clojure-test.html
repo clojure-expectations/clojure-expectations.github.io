@@ -41,7 +41,6 @@
 
         <p class="header">This project is maintained by <a class="header name" href="https://github.com/jaycfields">jaycfields</a></p>
 
-
       </header>
       <section>
         <h1>
@@ -52,16 +51,65 @@
 </blockquote>
 
 <h2>
-<a name="freezetime" class="anchor" href="#freezetime"><span class="octicon octicon-link"></span></a>Freezing Time</h2>
+<a name="clojure-test-compatibility" class="anchor" href="#clojure-test-compatibility"><span class="octicon octicon-link"></span></a>clojure.test compatibility</h2>
+<p>Experimental <code>clojure.test</code> compatibility is available as part of the 2.2.0-SNAPSHOT release.
+  There is a new <code>expectations.clojure.test</code> namespace containing a <code>defexpect</code> that
+  allows for named expectations to be defined, like <code>clojure.test</code>'s <code>deftest</code> macro.</p>
+<div class="highlight"><pre>(ns example.test
+  (:require [expectations :refer :all]
+            [expectations.clojure.test :refer [defexpect]]))
 
-If you're using expectations and Joda Time, you now have the ability to freeze time in expectations (version 1.4.16 and above). The following code demonstrates how you can use the freeze-time macro to set the time, verify anything you need, and allow time to be reset for you.
-<br><br>
-<script src="https://gist.github.com/3989207.js?file=blog_expectations.clj"></script>
-<br>
-Under the covers freeze-time is setting the current millis using the DateTime you specify, running your code and resetting the current millis in a finally. As a result, after your code finishes executing, even if finishing involves throwing an exception, the millis of Joda Time will be set back to working as you'd expect.
-<br><br>
-The freeze-time macro can be used in both the expected and actual forms, and can be nested if you need to set the time multiple times within a single expectation.
+;; a single named expectation
+(defexpect two 2 (+ 1 1 ))
 
+;; a named group of expectations
+(defexpect group
+  (expect [1 2] (conj [] 1 2))
+  (expect #{1 2} (conj #{} 1 2))
+  (expect {1 2} (assoc {} 1 2)))
+</pre></div>
+<p>Expectations defined this way can be run with regular <code>clojure.test</code> tooling, such as <code>lein test</code>.</p>
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</pre>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
