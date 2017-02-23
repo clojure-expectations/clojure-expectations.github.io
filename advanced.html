@@ -89,6 +89,23 @@ above, the default is 0.001 and the test is equivalent to:
 <pre>
 (expect true (<= 0.332 (/ 1 3) 0.334))</pre>
 <br />
+<span style="font-weight: bold;">Functionally Equivalent</span><br />
+Sometimes your expected and actual values are computed via functions from the
+same underlying value. If you're trying to do this with <tt>from-each</tt>, it
+can be a bit awkward as you need both the underlying item from the sequence (to
+compute the expected value) as well as the computed actual value. The <tt>functionally</tt>
+predicate is intended to help with that:
+<pre>
+;; compares the results of calling fn-1 and fn-2 on values from 0..99:
+(expect (functionally fn-1 fn-2)
+        (from-each [a (range 100)]
+          a))</pre>
+The default failure message is "not functionally equivalent" but you can provide
+your own "difference" function that accepts the computed results from each function
+(effectively the expected value and the actual value) and returns a string explaining
+how they differ. For string results, you can use <tt>strings-difference</tt> which
+is what Expectations uses internally when explaining how expected and actual strings differ.
+<br />
 <span style="font-weight: bold;">Testing for a certain type</span><br />
 I basically never write tests that verify the result of a function is a certain type. However, for the once in a blue moon case where that's what I need,
 expectations allows me to verify that the result of a function call is a certain type simply by using that type as the expected value.
