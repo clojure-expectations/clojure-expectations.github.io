@@ -78,6 +78,10 @@
   so you can call <code>(two)</code> and <code>(group)</code> to run those tests
   (and they will print out any failures), the same way <code>deftest</code> works.</p>
 
+<p>As of version 2.2.0-beta2, you can intermix other code inside <code>defexpect</code>
+  and you can nest <code>expect</code> forms inside other code. This is considered
+  an experimental feature at present, pending further testing in the wild!</p>
+
 <p>When you <code>require</code> the <code>expectations.clojure.test</code>
   namespace, it automatically disables the default "run tests on shutdown" mode
   of expectations. Since most of the expectations tooling already disables that
