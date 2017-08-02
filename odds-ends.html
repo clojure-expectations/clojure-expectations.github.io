@@ -69,6 +69,9 @@ This is a reflection of my personal opinion that <a href="http://blog.jayfields.
 If you desire test names, feel free to drop a comment above each test. Truthfully, this is probably a better solution anyway, since you can use spaces (instead of dashes) to separate words in a comment.
 Comments are good when used properly, but they can become noise when they are required. The decision to simply use comments for test names is another example of improving signal by removing noise.<br />
 <br />
+By contrast, if you use <a href="/clojure-test.html">Expectations' clojure.test</a> integration with <tt>defexpect</tt>, names are <em>required</em> because that's how <tt>clojure.test</tt> knows
+which functions (tests) to run, how to run only failed tests, and so on.<br />
+<br />
 <span style="font-weight: bold;">Running Focused Expectations</span><br />
 Sometimes you'll have a file full of expectations, but you only want to run a specific expectation - expectations solves this problem by giving you 'expect-focused'.
 If you use expect-focused only expectations that are defined using expect-focused will be run.<br />

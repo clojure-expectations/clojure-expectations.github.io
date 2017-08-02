@@ -89,6 +89,11 @@ or <code>{:expectations-options :after-run}</code>
 metadata to a function in the expectations-options namespace, your function should be run automatically the next time your test suite runs.
 You may want to start with a <code>(println)</code> just to verify that things are going as you expect.
 
+<h2>
+<a name="clojure-test" class="anchor" href="#clojure-test"><span class="octicon octicon-link"></span></a>Expectations' clojure.test Integration</h2>
+If you are using <a href="/clojure-test.html">Expectations' clojure.test</a> integration with <tt>defexpect</tt>, then you should use <tt>clojure.test/use-fixtures :once<tt>
+  to run code before or after the test suite.
+
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>

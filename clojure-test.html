@@ -72,6 +72,9 @@
   tooling, such as <code>lein test</code> or <code>boot test</code>,
   or via the "standard" test running commands within various Clojure-compatible
   editors that are designed to work with <code>clojure.test</code>.</p>
+<p>All the regular <code>clojure.test</code> functionality should be in play
+  at this point, including <code>use-fixtures</code> instead of Expectations'
+  own in-context/before-run/after-run functionality.</p>
 <p>The above code creates functions <code>two</code> and <code>group</code> that
   have <code>:test</code> metadata (containing the actual test expressions), and
   the functions themselves run <code>clojure.test/test-var</code> on themselves
