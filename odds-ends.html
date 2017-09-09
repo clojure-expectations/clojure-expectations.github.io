@@ -52,7 +52,7 @@
 </blockquote>
 
 <h2>
-<a name="oe" class="anchor" href="#oe"><span class="octicon octicon-link"></span></a>Stacktraces, Test Names, Focused Tests, & JUnit Integration</h2>
+<a name="oe" class="anchor" href="#oe"><span class="octicon octicon-link"></span></a>Stacktraces, Test Names, Focused Tests, READMEs, & JUnit Integration</h2>
 
 The previous sections on <a href="https://github.com/clojure-expectations/expectations">expectations</a> unit testing syntax cover all of the various ways that expectations can be used to write tests
 and what you can expect when your tests fail. However, there are a few other things worth knowing about expectations.<br />
@@ -92,6 +92,53 @@ As you can see, expectations only ran one test - the expect-focused on line 6. I
 <br />
 <span style="font-weight: bold;">Test Running</span><br />
 If you always use 'lein expectations' to run your tests you'll never even care; however, if you ever want to run individual test files it's important to know that your tests run by default on JVM shutdown. When I'm working with Clojure and Java I usually end up using IntelliJ, and therefore have the ability to easily run individual files. When I switched from clojure.test to expectations I wanted to make test running as simple as possible - so I removed the need to specify (run-all-tests). Of course, if you don't want expectations to run for some reason you can disable this feature by calling (expectations/disable-run-on-shutdown).<br />
+<br />
+<span style="font-weight: bold;">READMEs</span><br />
+You project's <code>README.md</code> file is often chock full of examples that just scream out "Test me!".<br />
+<br />
+As of version 2.2.0-beta3, Expectations adds the ability to generate a <code>readme.clj</code>
+test file from a specified README file and then run the examples as tests automatically.<br />
+<br />
+Specify the system property <code>expectations.readme</code> or the environment variable
+<code>EXPECTATIONS_README</code> to identify the README file -- in the <code>project.clj</code> file
+for Expectations itself, you'll see <code>examples.md</code> identified via the system property.<br />
+<br />
+You can optionally specify the output folder via the system property
+<code>expectations.test.path</code> or the environment variable <code>EXPECTATIONS_TEST_PATH</code>.
+It defaults to <code>test</code> -- in the <code>project.clj</code> file for Expectations itself,
+you'll see <code>test/clojure</code> identified via the system property.<br />
+<br />
+If the README file is newer than <code>readme.clj</code> in the output folder -- or the
+latter does not exist -- then Expectations will generate <code>readme.clj</code> from that
+file, maintaining line numbers (hopefully!), and then require the new test file
+(so that it is run as part of the test suite). If <code>readme.clj</code> is newer, it will
+just be treated as a normal test file.<br />
+<br />
+Example code in your README that is introduced with a triple back-tick and either
+the language identifier <code>clojure</code> or <code>clj</code> is copied into the <code>readme.clj</code> file.
+A line beginning with <code>=></code> is assumed to be the expected result of evaluating that
+code and becomes the "expected" value (and the lines of code prior to <code>=></code> are
+treated as the "actual" value). A code block that has no <code>=></code> is copied directly
+to <code>readme.clj</code> so your examples can contain separate blocks of setup code. For example:<br />
+<div class="hightlight"><pre>
+```clojure
+(* 1 2 3)
+=> 6
+```
+</pre></div>
+will generate:
+<div class="highlight"><pre>
+
+(expectations/expect 6
+  (* 1 2 3))
+
+</pre></div>
+A new <code>expectations/readme</code> function has been added with can be invoked by
+tooling with the file path of the input (README) file and the folder path where
+<code>readme.clj</code> should be written. If this function is invoked with no arguments --
+which happens when the <code>expectations</code> namespace is loaded! -- it uses the system
+properties and environment variables (above) to determine the input file path
+and output file path.<br />
 <br />
 <span style="font-weight: bold;">JUnit Integration</span><br />
 Lack of JUnit integration was a deal breaker for my team in the early days, so expectations comes with an easy way to run all tests as part of JUnit. If you want all of your tests to run in JUnit all you need to do is implement ExpectationsTestRunner.TestSource. The following example is what I use to run all the tests in expectations with JUnit.<br />

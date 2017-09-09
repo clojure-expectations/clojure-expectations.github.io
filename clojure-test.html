@@ -85,6 +85,23 @@
   and you can nest <code>expect</code> forms inside other code. This is considered
   an experimental feature at present, pending further testing in the wild!</p>
 
+<p>As of version 2.2.0-rc1, you can wrap blocks of code in <code>expecting</code>
+  to provide more descriptive test output -- mirroring <code>clojure.test/testing</code>:</p>
+<div class="highlight"><pre>(ns example.test
+  (:require [expectations :refer :all]
+            [expectations.clojure.test :refer [defexpect expecting]]))
+
+;; a single named expectation
+(defexpect two 2 (+ 1 1))
+
+;; a named group of expectations
+(defexpect group
+  (expecting "conj should add each element"
+    (expect [1 2] (conj [] 1 2))
+    (expect #{1 2} (conj #{} 1 2)))
+  (expect {1 2} (assoc {} 1 2)))
+</pre></div>
+
 <p>When you <code>require</code> the <code>expectations.clojure.test</code>
   namespace, it automatically disables the default "run tests on shutdown" mode
   of expectations. Since most of the expectations tooling already disables that
