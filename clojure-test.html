@@ -55,9 +55,12 @@
 <p><code>clojure.test</code> compatibility is available as of the 2.2.0-alpha1 release.
   There is a new <code>expectations.clojure.test</code> namespace containing a <code>defexpect</code> macro that
   allows for named expectations to be defined, like <code>clojure.test</code>'s <code>deftest</code> macro.</p>
+<p>As of 2.2.0-rc3, <code>expectations.clojure.test</code> should be used standalone, without requiring
+  <code>expectations</code> - all public symbols from the latter are now available in the former.
+  In particular, be aware that both namespaces now define an <code>expect</code> macro and they
+  behave differently!</p>
 <div class="highlight"><pre>(ns example.test
-  (:require [expectations :refer :all]
-            [expectations.clojure.test :refer [defexpect]]))
+  (:require [expectations.clojure.test :refer :all]))
 
 ;; a single named expectation
 (defexpect two 2 (+ 1 1))
@@ -82,14 +85,13 @@
   (and they will print out any failures), the same way <code>deftest</code> works.</p>
 
 <p>As of version 2.2.0-beta2, you can intermix other code inside <code>defexpect</code>
-  and you can nest <code>expect</code> forms inside other code. This is considered
-  an experimental feature at present, pending further testing in the wild!</p>
+  and you can nest <code>expect</code> forms inside other code. As of 2.2.0-rc3,
+  this is a fully supported feature!</p>
 
 <p>As of version 2.2.0-rc1, you can wrap blocks of code in <code>expecting</code>
   to provide more descriptive test output -- mirroring <code>clojure.test/testing</code>:</p>
 <div class="highlight"><pre>(ns example.test
-  (:require [expectations :refer :all]
-            [expectations.clojure.test :refer [defexpect expecting]]))
+  (:require [expectations.clojure.test :refer :all]))
 
 ;; a single named expectation
 (defexpect two 2 (+ 1 1))
@@ -106,18 +108,22 @@
   namespace, it automatically disables the default "run tests on shutdown" mode
   of expectations. Since most of the expectations tooling already disables that
   and runs tests explicitly, this should not cause too many surprises but it is
-  worth being aware of this when you start to mix'n'match test styles.</p>
+  worth being aware of this if you decide to mix'n'match test styles.</p>
 
 <h3>
   <a name="migrating-to-clojure-test" class="anchor" href="#migrating-to-clojure-test"><span class="octicon octicon-link"></span></a>migrating to clojure.test</h3>
 <p>Given the streamlined simplicity of expectations, you might wonder why you
   would want to migrate your expectations test suite to <code>clojure.test</code>-style
   named tests? The short answer is <strong>tooling</strong>! Whilst we have
-  well-maintained plugins for Leiningen and Boot, as well as an Emacs mode,
+  well-maintained, stable plugins for Leiningen and Boot, as well as an Emacs mode,
   the reality is that Clojure tooling is constantly evolving and most of those
-  tools -- such as the excellent <a href="https://cider.readthedocs.io/en/latest/">CIDER</a>
+  tools -- such as the excellent <a href="https://cider.readthedocs.io/en/latest/">CIDER</a>,
+  <a href="https://cursive-ide.com/">Cursive</a>,
   and the more recent <a href="https://atom.io/packages/proto-repl">ProtoREPL</a> (for Atom) --
-  are going to focus on Clojure's built-in testing library first. A whole ecosystem
+  are going to focus on Clojure's built-in testing library first.
+  Support for the original form of Expectations, using unnamed tests, is
+  non-existent in Cursive, and can be problematic in other editors.
+  A whole ecosystem
   of tooling has grown up around <code>clojure.test</code> and to take advantage of
   that with expectations, we either need to develop compatible extensions to each
   and every tool or we need expectations to be compatible with <code>clojure.test</code>.</p>
@@ -133,7 +139,7 @@
 <p>You can convert your test suite piecemeal, either replacing <code>expect</code>
   with <code>defexpect</code> (and a name) or wrapping several <code>expect</code>
   forms with a single <code>defexpect</code> (and a name). You can do this one
-  test at a time, or in larger pieces, but you'll need to run both types of tests
+  namespace at a time, but you'll need to run both types of tests
   explicitly via tooling:</p>
 <pre>
 jfields$ lein do expectations, test
@@ -144,12 +150,12 @@ jfields$ boot expectations test
   is built on top of <code>clojure.test</code>, such as JUnit XML output,
   automatically.</p>
 <p>What do you lose? Well, <code>clojure.test</code>-based failure reporting
-  isn't as sophisticated as expectations-based failure reporting so you will get
-  just "expected" and "actual" values, and a message with slightly
-  more detail for some types of failure. Unlike <code>clojure.test</code> itself,
-  the "expected" and "actual" values show both the final computed value and the
-  expression that created it. I hope to further improve this area in future,
-  to restore some of the improvements from expectations' failure reporting.</p>
+  isn't as sophisticated as expectations-based failure reporting so you will
+  lose some of the clarity and expressiveness there. As of 2.2.0-rc3, I think
+  most of the original expressiveness has been restored -- although there is
+  a little bit of repetition since the output now contains both
+  <code>clojure.test</code>s "expected" and "actual" as well as the more
+  elaborate failure messages from Expectations which may also include those.</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>

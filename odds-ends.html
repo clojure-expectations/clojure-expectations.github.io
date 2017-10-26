@@ -89,6 +89,10 @@ Ran 1 tests containing 1 assertions in 2 msecs
 IGNORED 2 EXPECTATIONS
 0 failures, 0 errors.</pre>
 As you can see, expectations only ran one test - the expect-focused on line 6. If the other tests had been run the test on line 5 would have created a failure. It can be easy to accidentally leave a few expect-focused calls in, so expectations prints the number of ignored expectations in capital letters as a reminder. Focused expectation running is yet another way to remove noise while working through a problem.<br />
+Note that focused expectations are only available with Expectations-specific tooling, using the original, unnamed test approach.
+If you use <a href="/clojure-test.html">Expectations' clojure.test</a> integration with <tt>defexpect</tt>,
+you can use regular metadata on tests and Leiningen's "test selectors" approach to choose which
+tests to run. With Boot, you can use <code>boot-test</code>'s filters to achieve the same thing.<br />
 <br />
 <span style="font-weight: bold;">Test Running</span><br />
 If you always use 'lein expectations' to run your tests you'll never even care; however, if you ever want to run individual test files it's important to know that your tests run by default on JVM shutdown. When I'm working with Clojure and Java I usually end up using IntelliJ, and therefore have the ability to easily run individual files. When I switched from clojure.test to expectations I wanted to make test running as simple as possible - so I removed the need to specify (run-all-tests). Of course, if you don't want expectations to run for some reason you can disable this feature by calling (expectations/disable-run-on-shutdown).<br />
