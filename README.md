@@ -1,6 +1,6 @@
 # Getting Started
 
-Expectations lets you write concise, elegant, yet powerful tests. Each expectation has an expected outcome and an actual expression to be computed. For compatibility with `clojure.test` tooling, expectations can be named. 
+Expectations lets you write concise, elegant, yet powerful tests. Each expectation has an expected outcome and an actual expression to be computed. For compatibility with `clojure.test` tooling, expectations can be named.
 
 Add Expectations to your project with `[expectations "2.2.0-rc3"]` in your `:dependencies` \(in the `:dev` profile for Leiningen, or with `:scope "test"` for Boot\) and fire up a REPL to follow along with the examples!
 
@@ -31,6 +31,10 @@ Let's look at some examples of named expectations:
 ;; the expected outcome can be a predicate:
 
 (defexpect no-elements empty? (list))
+
+;; the expected outcome can be a type:
+
+(defexpect named String (name :foo))
 
 ;; if the actual value is a collection, the expected outcome can be an element or subset "in" that collection:
 
