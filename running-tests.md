@@ -68,7 +68,7 @@ Ran 2 tests containing 3 assertions.
 3 failures, 0 errors.
 ```
 
-When we see that `(sum [])` produced `1` instead of `0`, we quickly realize that we should be initializing the `total` to `0` in the loop! We fix that and run the tests again:
+When we see that `(sum [])` produced `1` instead of `0`, we quickly realize that we should be initializing the `total` to `0` in the `loop`! We fix that and run the tests again:
 
 ```
 FAIL in (simple-sums) (core_test.clj:8)
@@ -89,7 +89,7 @@ Ran 2 tests containing 3 assertions.
 2 failures, 0 errors.
 ```
 
-We see that `empty-sum` no longer fails, but we don't seem to be counting the last element of our collection. Ah, we're calling `next` in the `if` test _and_ in the loop! We'll change the `if` test to `(seq coll)` and run our tests again:
+We see that `empty-sum` no longer fails, but we don't seem to be counting the last element of our collection. Ah, we're calling `next` in the `if` test _and_ in the `recur`! We'll change the `if` test to `(seq coll)` and run our tests again:
 
 ```
 Ran 2 tests containing 3 assertions.
@@ -122,7 +122,9 @@ Leiningen has a built-in task `test` to run your tests: `lein test`
 
 ## Atom/ProtoREPL
 
-## IntelliJ
+ProtoREPL has built-in support for running tests. Start a REPL for your project \(for example, using the `Start REPL from open project.clj/build.boot` command from the right-click &gt; `proto-repl` submenu \(or `cmd-opt-shift L` on a Mac\). Open your test namespace and load it into the REPL \(`ctl-alt-, f` or `cmd-opt-shift F`\). Now you can run the tests in that namespace using the `Run Tests In Namespace` command from the right-click &gt; `proto-repl` submenu or `ctl-alt-, x` \(or `cmd-opt-x` on a Mac\)
 
+## IntelliJ/Cursive
 
+Cursive has built-in support for running tests, and can show the results inline in the test editor. Create a run configuration for a `Clojure REPL` for your project, and start it up. Open your test namespace. Right-click &gt; `REPL` &gt; `Run tests in current NS in REPL`. You'll see the test results summary in the REPL pane, and gutter indicators for pass \(`OK` in green\) or fail \(`!` in orange\). For test failures, you'll see a red wiggly line under the expectation that failed and if you hover over that expression, you'll see an explanation of why the test failed. 
 
