@@ -14,7 +14,7 @@ test/
 
 Let's put a \(broken\) function into `src/myapp/core.clj` that we wish to test \(and fix\):
 
-```
+```clojure
 (ns myapp.core)
 
 (defn sum
@@ -28,7 +28,7 @@ Let's put a \(broken\) function into `src/myapp/core.clj` that we wish to test \
 
 Now we'll write some tests for `sum` in `test/myapp/core_test.clj`:
 
-```
+```clojure
 (ns myapp.core-test
   (:require [expectations.clojure.test :refer :all]
             [myapp.core :refer :all]))
@@ -102,7 +102,7 @@ Success!
 
 Boot doesn't come with a test runner out-of-the-box so you will need to add the following to your `build.boot` file \(in addition to adding the `expectations` dependency\):
 
-```
+```clojure
 (merge-env! :source-paths #{"test"} ; source paths are not added to build/deploy artifacts
             :dependencies '[[adzerk/boot-test "RELEASE" :scope "test"]])
 (require '[adzerk.boot-test :refer [test]])
@@ -110,7 +110,7 @@ Boot doesn't come with a test runner out-of-the-box so you will need to add the 
 
 If you now run `boot test` you'll see that it looks for tests in all of your namespaces, including your source namespaces. We only want to look in namespaces that end in `-test`, so we'll use the `-I` \(`--include`\) option to limit the namespaces:
 
-```bash
+```
 boot test -I -test$
 ```
 
