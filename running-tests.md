@@ -42,7 +42,7 @@ Now we'll write some tests for `sum` in `test/myapp/core_test.clj`:
 
 See the sections below for how to run your tests with Boot or Leiningen. When you run these tests, they'll fail:
 
-```
+```clojure
 FAIL in (simple-sums) (core_test.clj:8)
 produced: 4 from (sum [1 2 3])
 failure is expected: 6 
@@ -70,7 +70,7 @@ Ran 2 tests containing 3 assertions.
 
 When we see that `(sum [])` produced `1` instead of `0`, we quickly realize that we should be initializing the `total` to `0` in the `loop`! We fix that and run the tests again:
 
-```
+```clojure
 FAIL in (simple-sums) (core_test.clj:8)
 produced: 3 from (sum [1 2 3])
 failure is expected: 6 
@@ -91,7 +91,7 @@ Ran 2 tests containing 3 assertions.
 
 We see that `empty-sum` no longer fails, but we don't seem to be counting the last element of our collection. Ah, we're calling `next` in the `if` test _and_ in the `recur`! We'll change the `if` test to `(seq coll)` and run our tests again:
 
-```
+```clojure
 Ran 2 tests containing 3 assertions.
 0 failures, 0 errors.
 ```
@@ -126,5 +126,5 @@ ProtoREPL has built-in support for running tests. Start a REPL for your project 
 
 ## IntelliJ/Cursive
 
-Cursive has built-in support for running tests, and can show the results inline in the test editor. Create a run configuration for a `Clojure REPL` for your project, and start it up. Open your test namespace. Right-click &gt; `REPL` &gt; `Run tests in current NS in REPL`. You'll see the test results summary in the REPL pane, and gutter indicators for pass \(`OK` in green\) or fail \(`!` in orange\). For test failures, you'll see a red wiggly line under the expectation that failed and if you hover over that expression, you'll see an explanation of why the test failed. 
+Cursive has built-in support for running tests, and can show the results inline in the test editor. Create a run configuration for a `Clojure REPL` for your project, and start it up. Open your test namespace. Right-click &gt; `REPL` &gt; `Run tests in current NS in REPL`. You'll see the test results summary in the REPL pane, and gutter indicators for pass \(`OK` in green\) or fail \(`!` in orange\). For test failures, you'll see a red wiggly line under the expectation that failed and if you hover over that expression, you'll see an explanation of why the test failed.
 
