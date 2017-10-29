@@ -4,4 +4,5 @@
 * [Running Tests](running-tests.md)
 * [Beyond Equality](beyond-equality.md)
 * [Expect More](expect-more.md)
+* [Fixtures](test-fixtures.md)
 
