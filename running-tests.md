@@ -98,6 +98,10 @@ Ran 2 tests containing 3 assertions.
 
 Success!
 
+# How To Run Tests
+
+In this section, we cover how to run our tests with different command line tools and different editors. _\[Emacs instructions will be added in due course -- but they should be the same as running `clojure.test`-style tests!\]_
+
 ## Boot
 
 Boot doesn't come with a test runner out-of-the-box so you will need to add the following to your `build.boot` file \(in addition to adding the `expectations` dependency\):
