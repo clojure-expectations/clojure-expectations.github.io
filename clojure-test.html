@@ -51,13 +51,12 @@
 
 <h2>
 <a name="clojure-test-compatibility" class="anchor" href="#clojure-test-compatibility"><span class="octicon octicon-link"></span></a>clojure.test compatibility</h2>
-<p><code>clojure.test</code> compatibility is available as of the 2.2.0-alpha1 release.
-  There is a new <code>expectations.clojure.test</code> namespace containing a <code>defexpect</code> macro that
+<p><code>clojure.test</code> compatibility is available via
+  <a href="https://github.com/clojure-expectations/clojure-test">clojure-expectations/clojure-test</a>.</p>
+  <p>Clojure CLI/<code>deps.edn</code>: <code>com.github.seancorfield/expectations {:mvn/version "RELEASE"}</code></p>
+  <p>Leiningen/<code>project.clj</code>>: <code>[com.github.seancorfield/expectations "RELEASE"]</code>></p>
+  <p>There is a new <code>expectations.clojure.test</code> namespace containing a <code>defexpect</code> macro that
   allows for named expectations to be defined, like <code>clojure.test</code>'s <code>deftest</code> macro.</p>
-<p>As of 2.2.0-rc3, <code>expectations.clojure.test</code> should be used standalone, without requiring
-  <code>expectations</code> - all public symbols from the latter are now available in the former.
-  In particular, be aware that both namespaces now define an <code>expect</code> macro and they
-  behave differently!</p>
 <div class="highlight"><pre>(ns example.test
   (:require [expectations.clojure.test :refer :all]))
 
@@ -83,11 +82,10 @@
   so you can call <code>(two)</code> and <code>(group)</code> to run those tests
   (and they will print out any failures), the same way <code>deftest</code> works.</p>
 
-<p>As of version 2.2.0-beta2, you can intermix other code inside <code>defexpect</code>
-  and you can nest <code>expect</code> forms inside other code. As of 2.2.0-rc3,
-  this is a fully supported feature!</p>
+<p>You can intermix other code inside <code>defexpect</code>
+  and you can nest <code>expect</code> forms inside other code.</p>
 
-<p>As of version 2.2.0-rc1, you can wrap blocks of code in <code>expecting</code>
+<p>You can wrap blocks of code in <code>expecting</code>
   to provide more descriptive test output -- mirroring <code>clojure.test/testing</code>:</p>
 <div class="highlight"><pre>(ns example.test
   (:require [expectations.clojure.test :refer :all]))
@@ -103,11 +101,8 @@
   (expect {1 2} (assoc {} 1 2)))
 </pre></div>
 
-<p>When you <code>require</code> the <code>expectations.clojure.test</code>
-  namespace, it automatically disables the default "run tests on shutdown" mode
-  of expectations. Since most of the expectations tooling already disables that
-  and runs tests explicitly, this should not cause too many surprises but it is
-  worth being aware of this if you decide to mix'n'match test styles.</p>
+<p>Note that <code>expectations.clojure.test</code> does not run tests on shutdown.
+  Instead, tests are run on-demand via the usual <code>clojure.test</code> machinery and test runners.</p>
 
 <h3>
   <a name="migrating-to-clojure-test" class="anchor" href="#migrating-to-clojure-test"><span class="octicon octicon-link"></span></a>migrating to clojure.test</h3>
@@ -150,11 +145,7 @@ jfields$ boot expectations test
   automatically.</p>
 <p>What do you lose? Well, <code>clojure.test</code>-based failure reporting
   isn't as sophisticated as expectations-based failure reporting so you will
-  lose some of the clarity and expressiveness there. As of 2.2.0-rc3, I think
-  most of the original expressiveness has been restored -- although there is
-  a little bit of repetition since the output now contains both
-  <code>clojure.test</code>s "expected" and "actual" as well as the more
-  elaborate failure messages from Expectations which may also include those.</p>
+  lose some of the clarity and expressiveness there.</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
